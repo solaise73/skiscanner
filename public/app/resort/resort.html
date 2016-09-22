@@ -1,0 +1,79 @@
+<div layout="column" layout-fill>
+  <md-toolbar class="md-warn md-hue-2">
+    <div class="md-toolbar-tools">
+      <md-button ng-href="#!/resorts">Back</md-button>
+      <span flex></span>
+      <span>{{resortId}} {{dateStart | date : 'mediumDate'}}</span>
+
+    </div>
+
+  </md-toolbar>
+</div>
+<section>
+  <md-subheader class="md-primary">Websites checked</md-subheader>
+  <div layout="row" layout-align="space-around center">
+    <div ng-repeat="(supplierId,supplier) in suppliers track by supplierId" class="col-xs-2 supplier" flex>
+      <img ng-src="{{companies[supplierId].logo}}" ng-class="{'loaded': supplier.finished}"/>
+      <md-progress-circular md-mode="indeterminate" md-diameter="40px" ng-hide="suppliers[supplierId].finished"></md-progress-circular>
+    </div>
+  </div>
+</section>
+
+<md-content>
+  <div ng-repeat="(levelId,level) in category track by levelId">
+    <md-toolbar class="md-primary ">
+      <h3 class="md-toolbar-tools">{{equipment.level[levelId]}} {{equipment.category[catIdFilter]}}</h3>
+    </md-toolbar>
+      <section>
+        <md-list flex layout-padding>
+          <md-list-item class="md-2-line" ng-repeat="(shopId, shop) in level.shops" ng-init="cheapest = cheapestSupplier(shop.suppliers)">
+            <img ng-src="{{companies[cheapest.key].logo}}" class="md-avatar" alt="{{cheapest.name}}" />
+            <div class="md-list-item-text">
+              <h3>{{shops[shopId].name}}</h3>
+              <h4>Booking with {{companies[cheapest.key].name}}</h4>
+            </div>
+            <div class="booking">
+              <md-button class="md-accent md-raised" ng-click="showSuppliers($event, shopId, levelId)">{{cheapest.price| currency:"€":2}}<div class="tag">Best price</div></md-button>
+              <div ng-show="keys(shop.suppliers).length>1">and {{ keys(shop.suppliers).length-1 }} other offers</div>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </md-list>
+      </section>
+
+      <div style="visibility: hidden; display: none" >
+        <div class="md-dialog-container" id="suppliers-{{shopId}}-{{levelId}}" ng-repeat="(shopId, shop) in level.shops">
+          <md-dialog >
+            <md-dialog-content style="min-wdth: 300px;max-width:800px;max-height:810px; " flex layout-padding>
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <h2>{{shops[shopId].name}}, {{resortId}}</h2>
+              </div>
+            </md-toolbar>
+              <md-list>
+                <md-list-item class="md-2-line" ng-repeat="(i, supplier) in shop.suppliers | toArray | orderBy:'price'" ng-init="supplierLoaded(supplier.key)">
+                  <img ng-src="{{companies[supplier.key].logo}}" class="md-avatar" alt="{{supplier.name}}" />
+                  <div class="md-list-item-text">
+                    <h3>{{companies[supplier.key].name}}</h3>
+                    <h4>{{supplier.full_price| currency:"€":2}} - {{supplier.discount| number :0 }}%</h4>
+                  </div>
+                  <md-button class="md-accent md-raised" ng-href="{{companies[supplier.key].deeplink}}" target="_new">{{supplier.price| currency:"€":2}}</md-button>
+                </md-list-item>
+              </md-list>
+            <md-dialog-content >
+          </md-dialog>
+        </div>
+      </div>
+
+  </div>
+</md-content>
+<div class="demo-md-panel md-padding">
+  <p>
+    Skiscanner checks popular ski hire websites for the best prices so you dont have to.
+  </p>
+  <p>
+    We show the prices for you to compare, but you make the booking with them.
+  </p>
+  <p ng-show="lastCheckDate">Prices were last checked at {{ lastCheckDate | date : 'medium'}}</p>
+</div>
+

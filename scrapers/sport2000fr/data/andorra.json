@@ -1,0 +1,16 @@
+[{
+    "name": "Andorra",
+    "id": 76,
+    "resorts": [
+        {"key":115, "value":"EL TARTER"},
+        {"key":172, "value":"GRAU ROIG"},
+        {"key":173, "value":"ENCAMP"},
+        {"key":175, "value":"CANILLO"},
+        {"key":178, "value":"LA MASSANA / PAL"},
+        {"key":213, "value":"LA MASSANA"},
+        {"key":333, "value":"ARINSAL"},
+        {"key":427, "value":"PAS DE LA CASE"},
+        {"key":480, "value":"SOLDEU"}
+    ]
+}]
+

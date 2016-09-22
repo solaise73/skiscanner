@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="skiscanner" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Skiscanner</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="app.css">
+
+  <script src="//www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDbdb_2Vjek54IHQgm5i_81QKgmdHFf9JY",
+      authDomain: "skiscanner-7c3b8.firebaseapp.com",
+      databaseURL: "https://skiscanner-7c3b8.firebaseio.com",
+      storageBucket: "skiscanner-7c3b8.appspot.com",
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+  <script src="//cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
+  <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+</head>
+<body>
+  <div layout="row" layout-align="center center">
+      <md-content style="width:600px;">
+        <div ng-view ></div>
+      </md-content>
+  </div>
+
+  <!--<script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>-->
+  <script src="app.js"></script>
+  <script src="resorts/resorts.controller.js"></script>
+  <script src="resort/resort.controller.js"></script>
+
+  <script>
+    (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
+      t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);
+    })(window, document, '_gscq','script','//widgets.getsitecontrol.com/55197/script.js');
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "paramNames": {
+    "country_id": "country_id",
+    "resort_id": "resort_id",
+    "shop_id": "shop_id",
+    "start": "first_day",
+    "duration": "duration"
+  },
+  "packLookups": {
+    "SC": "B",
+    "MC": "B"
+  },
+  "country": {
+    "Andorra" : "3",
+    "Austria" : "4",
+    "Bulgaria" : "9",
+    "France" : "1",
+    "Germany" : "8",
+    "Italy" : "5",
+    "Spain" : "6",
+    "Switzerland" : "2"
+  },
+  "lookup": {
+    "gender": {
+        "men": "M",
+        "women": "F",
+        "adult": "M",
+        "child": "C"
+    },
+    "category": {
+        "ski": "S",
+        "snowboard": "S"
+    },
+    "level": {
+        "blue skis": 1,
+        "red skis": 2,
+        "black skis": 3,
+        "diamond skis": 4,
+        "pink skis": 5
+    }
+  }
+}

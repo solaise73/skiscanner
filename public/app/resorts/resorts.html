@@ -1,0 +1,51 @@
+<div>
+  <md-toolbar class="md-warn md-hue-2">
+    <div class="md-toolbar-tools">
+      <span flex></span>
+      <span>Skiscanner</span>
+    </div>
+  </md-toolbar>
+
+
+  <md-content layout-padding >
+    <div>
+      <h1>Ski hire price comparison</h1>
+			<form name="contactForm" data-ng-submit="searchResort()">
+				<div layout-gt-sm="row">
+          <md-input-container >
+            <label>Country:</label>
+            <md-select ng-model="countrySelected">
+				      <md-option value="andorra" selected>Andorra</md-option>
+				    </md-select>
+          </md-input-container>
+        </div>
+				<div layout-gt-sm="row">
+          <md-input-container >
+            <label>Resort:</label>
+            <md-select ng-model="resortSelected">
+				      <md-option ng-repeat="(key, resort) in resorts" value="{{key}}" >{{resort.name}}</md-option>
+				    </md-select>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container >
+          	<label>Date:</label>
+            <md-datepicker ng-model="dateStart" md-placeholder="First day of rental" md-min-date="minDate" md-max-date="maxDate" md-hide-icons="calendar"></md-datepicker>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        	<md-input-container >
+        		<md-button type="submit" class="md-primary md-raised" aria-label="Search prices">Go</md-button>
+        	</md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <p>Skiscanner checks popular ski hire websites for the best prices so you dont have to.</p>
+          <p>For now, you can only check resorts in Andorra</p>
+        </div>
+
+      </form>
+    </div>
+  </md-content>
+</div>
