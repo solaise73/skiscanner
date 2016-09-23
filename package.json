@@ -1,0 +1,31 @@
+{
+  "name": "skiscanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "firebase": "^3.3.0",
+    "q": "^1.4.1",
+    "express": "^4.14.0",
+    "cheerio": "^0.19.0",
+    "request": "^2.74.0",
+    "slug": "^0.9.1",
+    "path": "^0.12.7",
+    "node-scrapy": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solaise73/skiscanner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solaise73/skiscanner/issues"
+  },
+  "homepage": "https://github.com/solaise73/skiscanner#readme"
+}
