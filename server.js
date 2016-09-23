@@ -26,6 +26,11 @@ function handleError(res, reason, message, code) {
  *    GET: finds all contacts
  *    POST: creates a new contact
  */
+
+ app.get("/", function(req, res) {
+	res.status(200).send('Hello, world!');
+});
+
 app.get("/compare/:countryId/:resortId/:start/:days", function(req, res) {
 	var countryId = req.params.countryId;
 	var resortId = req.params.resortId;
@@ -44,6 +49,8 @@ app.get("/compare/:countryId/:resortId/:start/:days", function(req, res) {
 	res.status(status).end(http.STATUS_CODES[status]);
 
 });
+
+
 
 // app.get("/compare/:supplierId", function(req, res) {
 // 	var supplierId = req.params.supplierId;
