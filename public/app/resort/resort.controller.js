@@ -214,8 +214,8 @@ angular
 
 		function pingServer(countryId, resortId, lastSaturdayString){
 			console.log('Pinging server', countryId, resortId, lastSaturdayString)
-			// var server = 'https://snowmodo.appspot.com';
-			var server = 'http://localhost:8080';
+			var server = 'https://snowmodo.appspot.com';
+			// var server = 'http://localhost:8080';
 			$http.get(server +'/compare/'+ countryId +'/'+ resortId +'/'+ lastSaturdayString +'/6').then(function(data){
 				console.log('Pinged server', data)
 			})

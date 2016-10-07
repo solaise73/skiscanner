@@ -4,8 +4,16 @@ var path          = require("path");
 var scrapers      = require('./scrapers');
 var firebase      = require("firebase");
 var q             = require('q');
+var fs            = require('fs');
 
 var app = express();
+
+// ensure cache directories are present
+var geoDir = './tmp/geo';
+var webDir = './tmp/websites';
+
+if (!fs.existsSync(geoDir)){ fs.mkdirSync(geoDir); }
+if (!fs.existsSync(webDir)){ fs.mkdirSync(webDir); }
 
 app.listen(8080, function () {
   console.log('snowmodo listening on port 8080!');

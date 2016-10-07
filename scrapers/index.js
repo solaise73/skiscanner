@@ -1,6 +1,7 @@
 var common        = require('./common');
 var q             = require('q');
 var firebase      = require("firebase");
+var fs            = require('fs');
 var skiset        = require('./skiset');
 var sport2000fr   = require('./sport2000fr');
 var alpinresorts  = require('./alpinresorts');
@@ -11,6 +12,11 @@ var intersportfr  = require('./intersportfr');
 var skimium       = require('./skimium');
 
 
+var websites = ['skiset', 'sport2000fr', 'alpinresorts', 'snowrental', 'skidiscount', 'skirepublic', 'intersportfr', 'skimium' ];
+websites.forEach(function(website){
+  var dir = './tmp/websites/'+ website;
+  if (!fs.existsSync(dir)){ fs.mkdirSync(dir); }
+});
 
 
 module.exports = {
@@ -22,7 +28,6 @@ module.exports = {
   skirepublic: skirepublic,
   intersportfr: intersportfr,
   skimium: skimium,
-  scrapeResort: scrapeResort,
   fetchResort: fetchResort,
   setUp: setUp
 }
@@ -102,71 +107,4 @@ function fetchResort(params){
     console.log('Finally! Tidy up')
     setLastScrape(params)
   });
-}
-
-function scrapeResort(params){
-  console.log('scrapeResort', params.resort_id)
-  return checkLastScrape(params)
-  .then(function(params){
-    console.log(params)
-    q.allSettled([
-      sport2000fr.doResort(params),
-      skidiscount.doResort(params),
-      snowrental.doResort(params),
-      skiset.doResort(params),
-      alpinresorts.doResort(params)
-    ]).then(function(data){
-      console.log('Then! Scraped and processed', data)
-    }).catch(function(err){
-      console.log('Catch! ', err)
-    }).finally(function(){
-      console.log('Finally! Tidy up')
-      setLastScrape(params)
-    });
-  })
-}
-
-function mapResortToPlaceId(params){
-  var defer = q.defer();
-  console.log('mapResortToPlaceId', params.resort_id);
-  if (params.resort_id.length>25){
-    firebase.database().ref().child('resorts').child(params.resort_id).once("value")
-    .then(function(place){
-      if (place.exists()){
-        // snap.forEach(function(place){
-          params.place_id = params.resort_id;
-          params.resort_id = place.val()._resort_id;
-          // console.log(place.val())
-        // })
-        console.log(params.place_id, 'maps to', params.resort_id)
-        defer.resolve(params);
-      } else {
-        defer.reject('No resort name found for placeId')
-      }
-    })
-    .catch(function(err){
-      console.log( 'mapResortToPlaceId err'+ err)
-      defer.reject('mapResortToPlaceId err'+ err)
-    })
-
-  } else {
-    firebase.database().ref().child('resorts').orderByChild('_resort_id').startAt(params.resort_id).limitToFirst(1).once("value")
-    .then(function(snap){
-      if (snap.exists()){
-        snap.forEach(function(place){
-          var placeId = place.val().place_id;
-          params.place_id = placeId;
-          console.log('resort', params.resort_id, 'maps to', placeId)
-        })
-        defer.resolve(params);
-      } else {
-        defer.reject('No placeId found for resort name')
-      }
-    })
-    .catch(function(err){
-      console.log( 'mapResortToPlaceId err'+ err)
-      defer.reject('mapResortToPlaceId err'+ err)
-    })
-  }
-  return defer.promise
 }
