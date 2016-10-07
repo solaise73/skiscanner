@@ -5,3 +5,4 @@ public/app/bower_components/*/*/
 public/node_modules/*/*
 old/*
 tmp/*
+*.log
