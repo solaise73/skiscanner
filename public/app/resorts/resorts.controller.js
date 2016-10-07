@@ -6,25 +6,28 @@ angular
 	.controller('ResortsCtrl', ResortsCtrl)
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/resorts', {
-	    templateUrl: 'resorts/resorts.html?x2',
+	    templateUrl: 'resorts/resorts.html?x211',
 	    controller: 'ResortsCtrl'
 	  });
 	}])
 
-	ResortsCtrl.$inject = ['$scope', '$firebaseObject', '$location'];
+	ResortsCtrl.$inject = ['$scope', '$firebaseObject', '$firebaseArray', '$location'];
 
-	function ResortsCtrl ($scope, $firebaseObject, $location) {
-
+	function ResortsCtrl ($scope, $firebaseObject, $firebaseArray, $location) {
+		var self = this;
 		var rootRef = firebase.database().ref();
+		var countriesRef = rootRef.child('countries').orderByKey();
 		var resortsRef = rootRef.child('resorts').orderByKey();
-		$scope.resorts = $firebaseObject(resortsRef);
+		$scope.countries = $firebaseObject(resortsRef);
+		$scope.resorts = $firebaseArray(resortsRef);
 
 		$scope.minDate = new Date('2016-12-17');
 		$scope.maxDate = new Date('2017-04-17');
 		$scope.searchResort = searchResort;
+		$scope.querySearch = querySearch;
 
 		function searchResort(){
-			var path = '/ad/resort/'+ $scope.resortSelected + '/'+ getLastSaturdayString($scope.dateStart);
+			var path = '/'+ $scope.countrySelected +'/resort/'+ $scope.resortSelected + '/'+ getLastSaturdayString($scope.dateStart);
 			console.log(path)
 			$location.path(path);
 		}
@@ -36,5 +39,26 @@ angular
 		  console.log(t);
 		  return t.toISOString().split('T')[0];
 		}
+
+		function querySearch (query) {
+      var results = query ? $scope.resorts.filter( createFilterFor(query) ) : $scope.resorts;
+      var deferred;
+      if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+    }
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(state) {
+        return (state.value.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
 	}
 })();

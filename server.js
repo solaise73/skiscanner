@@ -8,12 +8,12 @@ var q             = require('q');
 var app = express();
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
+  console.log('snowmodo listening on port 8080!');
 });
 
 firebase.initializeApp({
-  serviceAccount: "skiscanner-f90bc330d8cb.json",
-  databaseURL: "https://skiscanner-7c3b8.firebaseio.com"
+  serviceAccount: "snowmodo-e745f9c60033.json",
+  databaseURL: "https://snowmodo.firebaseio.com"
 });
 
 // Generic error handler used by all endpoints.
@@ -22,13 +22,8 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-/*  "/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
- */
-
  app.get("/", function(req, res) {
-	res.status(200).send('Hello, world!');
+	res.status(200).send('Hello, snowmodo world!');
 });
 
 app.get("/compare/:countryId/:resortId/:start/:days", function(req, res) {
@@ -43,31 +38,10 @@ app.get("/compare/:countryId/:resortId/:start/:days", function(req, res) {
 		duration: days
 	};
 	console.log('Received request for', params)
-	scrapers.scrapeResort(params)
+	scrapers.fetchResort(params)
+
 
 	var status = 202;
 	res.status(status).end(http.STATUS_CODES[status]);
 
 });
-
-
-
-// app.get("/compare/:supplierId", function(req, res) {
-// 	var supplierId = req.params.supplierId;
-// 	var params = {
-// 		country_id: "AD",
-// 		resort_id: "soldeu",
-// 		start: "2016-12-24",
-// 		duration: 6
-// 	};
-// 	if (scrapers[supplierId]){
-// 		console.log('VALID supplierId', supplierId)
-// 		scrapers[supplierId].scrapeResort(params).then(function(data){
-// 			return scrapers[supplierId].processResort(params)
-// 		})
-// 	} else {
-// 		console.log('INvalid supplierId', supplierId)
-// 	}
-
-// });
-

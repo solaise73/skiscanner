@@ -1,78 +1,134 @@
 <div layout="column" layout-fill>
   <md-toolbar class="md-warn md-hue-2">
     <div class="md-toolbar-tools">
-      <md-button ng-href="#!/resorts">Back</md-button>
-      <span flex></span>
-      <span>{{resortId}} {{dateStart | date : 'mediumDate'}}</span>
-
+      <md-button aria-label="Go Back"ng-href="#!/resorts">Back</md-button>
+      <h2 flex>
+         <span>{{resort._name}}</span>
+      </h2>
     </div>
-
   </md-toolbar>
 </div>
 <section>
-  <md-subheader class="md-primary">Websites checked</md-subheader>
-  <div layout="row" layout-align="space-around center">
-    <div ng-repeat="(supplierId,supplier) in suppliers track by supplierId" class="col-xs-2 supplier" flex>
-      <img ng-src="{{companies[supplierId].logo}}" ng-class="{'loaded': supplier.finished}"/>
-      <md-progress-circular md-mode="indeterminate" md-diameter="40px" ng-hide="suppliers[supplierId].finished"></md-progress-circular>
+  <div layout="row" layout-align="space-around center" layout-padding>
+    <div ng-repeat="(websiteId,website) in websites track by websiteId" class="col-xs-2 website" flex>
+      <img ng-src="{{website.logo}}" ng-class="{'loaded': website.finished}" class="md-avatar"/>
+      <md-progress-circular md-mode="indeterminate" md-diameter="40px" ng-hide="websites[websiteId].finished || websites[websiteId].failed"></md-progress-circular>
     </div>
   </div>
 </section>
 
-<md-content>
-  <div ng-repeat="(levelId,level) in category track by levelId">
-    <md-toolbar class="md-primary ">
-      <h3 class="md-toolbar-tools">{{equipment.level[levelId]}} {{equipment.category[catIdFilter]}}</h3>
-    </md-toolbar>
-      <section>
-        <md-list flex layout-padding>
-          <md-list-item class="md-2-line" ng-repeat="(shopId, shop) in level.shops" ng-init="cheapest = cheapestSupplier(shop.suppliers)">
-            <img ng-src="{{companies[cheapest.key].logo}}" class="md-avatar" alt="{{cheapest.name}}" />
-            <div class="md-list-item-text">
-              <h3>{{shops[shopId].name}}</h3>
-              <h4>Booking with {{companies[cheapest.key].name}}</h4>
-            </div>
-            <div class="booking">
-              <md-button class="md-accent md-raised" ng-click="showSuppliers($event, shopId, levelId)">{{cheapest.price| currency:"€":2}}<div class="tag">Best price</div></md-button>
-              <div ng-show="keys(shop.suppliers).length>1">and {{ keys(shop.suppliers).length-1 }} other offers</div>
-            </div>
-            <md-divider ng-if="!$last"></md-divider>
-          </md-list-item>
-        </md-list>
-      </section>
+<div class="list-header">
+  <span ng-show="shopWithPrices.length"> {{shopWithPrices.length}} Shops found</span>
+  <span ng-hide="shopWithPrices.length"> Looking for shops</span>
+</div>
+<div class="list-description" layout="row">
+  <div flex>
+    Showing prices and discounts for <b>{{equipment.level[levelId]}} {{equipment.category[catId]}}</b> in <b>{{resort._name}}</b> based on <b>6 days</b> during the week <b>{{dateStart | date : 'mediumDate'}}</b>
+  </div>
+  <md-button class="md-raised" aria-label="Change" ng-click="showFilters($event)">
+          Change
+  </md-button>
+</div>
+<md-content layout-padding>
+
+  <md-list>
+    <md-list-item class="md-3-line shop" ng-repeat="(shopId,shop) in shopWithPrices  | orderBy:sortShopsByPrice " ng-controller="ShopCtrl" ng-hide="!shop.cheapestSupplier">
+      <img ng-if="shops[shop.$id].photos[0].photo_reference"  ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{shops[shop.$id].photos[0].photo_reference}}&key=AIzaSyBHqzj8eJtCTcbwE5UrmOv5h_6wAzmg5rw" class="md-avatar" />
+      <img ng-if="!shops[shop.$id].photos[0].photo_reference" src="http://www.canyonski.ca/wp-content/uploads/2015/10/icon-skiSchool.png" class="md-avatar" />
+
+      <div class="md-list-item-text">
+        <h4>{{shops[shop.$id].name}}</h3>
+        <h5> -{{shop.cheapestSupplier[catId][levelId].discount}}% {{shop.cheapestSupplier[catId][levelId].name}}</h5>
+        <h6>via {{websites[shop.cheapestSupplier.key].name}}</h6>
+      </div>
+      <div class="booking">
+        <md-button class="md-accent md-raised" ng-click="showSuppliers($event, shopId)" >
+        {{shop.cheapestSupplier[catId][levelId].price | currency:"€":0}}<div class="tag">Book</div>
+        </md-button>
+        <div ng-show="keys(shop.suppliersForLevel).length>1">and {{ keys(shop.suppliersForLevel).length-1 }} other websites</div>
+      </div>
+      <md-divider ng-if="!$last"></md-divider>
+
+
 
       <div style="visibility: hidden; display: none" >
-        <div class="md-dialog-container" id="suppliers-{{shopId}}-{{levelId}}" ng-repeat="(shopId, shop) in level.shops">
-          <md-dialog >
-            <md-dialog-content style="min-wdth: 300px;max-width:800px;max-height:810px; " flex layout-padding>
-            <md-toolbar>
-              <div class="md-toolbar-tools">
-                <h2>{{shops[shopId].name}}, {{resortId}}</h2>
-              </div>
-            </md-toolbar>
-              <md-list>
-                <md-list-item class="md-2-line" ng-repeat="(i, supplier) in shop.suppliers | toArray | orderBy:'price'" ng-init="supplierLoaded(supplier.key)">
-                  <img ng-src="{{companies[supplier.key].logo}}" class="md-avatar" alt="{{supplier.name}}" />
-                  <div class="md-list-item-text">
-                    <h3>{{companies[supplier.key].name}}</h3>
-                    <h4>{{supplier.full_price| currency:"€":2}} - {{supplier.discount| number :0 }}%</h4>
-                  </div>
-                  <md-button class="md-accent md-raised" ng-href="{{companies[supplier.key].deeplink}}" target="_new">{{supplier.price| currency:"€":2}}</md-button>
-                </md-list-item>
-              </md-list>
+        <div class="md-dialog-container" id="suppliers-{{shopId}}">
+          <md-dialog aria-label="List dialog {{shopId}}">
+            <md-dialog-content style="min-wdth: 300px;max-width:800px;max-height:810px; ">
+              <md-toolbar class="md-warn md-hue-2">
+                <div class="md-toolbar-tools">
+                  {{shops[shop.$id].name}}
+                </div>
+              </md-toolbar>
+              <md-card>
+                <img ng-if="shops[shop.$id].photos[0].photo_reference" ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=250&photoreference={{shops[shop.$id].photos[0].photo_reference }}&key=AIzaSyBHqzj8eJtCTcbwE5UrmOv5h_6wAzmg5rw" />
+
+                <img ng-if="!shops[shop.$id].photos[0].photo_reference" src="http://www.canyonski.ca/wp-content/uploads/2015/10/icon-skiSchool.png"/>
+
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-subhead">{{shops[shop.$id].formatted_address}}</span>
+                  </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="column" layout-align="start">
+                  Your booking options for this shop are:
+                  <md-button 
+                    ng-repeat="(supplierId, supplier) in shop.suppliersForLevel | toArray  | orderBy:sortSuppliersByPrice"
+                    ng-init="supplierLoaded(supplier.key)"
+                    class="md-raised"
+                    ng-class="{'md-accent': $first}"
+                    ng-href="{{websites[supplier.key].deeplink}}"
+                    target="_blank">{{websites[supplier.key].name}} -{{supplier[catId][levelId].discount}}% {{supplier[catId][levelId].price | currency:"€":0}}</md-button>
+
+                </md-card-actions>
+                <md-card-footer>
+                 The full price of {{shop.cheapestSupplier[catId][levelId].name}} is {{shop.cheapestSupplier[catId][levelId].full_price | currency:"€":0}} in this shop
+               </md-card-footer>
+              </md-card>
             <md-dialog-content >
           </md-dialog>
         </div>
       </div>
 
+
+
+    </md-list-item>
+  </md-list>
+
+
+  
+
+  <div style="visibility: hidden; display: none" >
+    <div class="md-dialog-container" id="filters">
+      <md-dialog aria-label="Filter dialog">
+        <md-dialog-content style="min-wdth: 300px;max-width:800px;max-height:810px; " flex layout-padding>
+        <md-toolbar class="md-hue-2">
+          <div class="md-toolbar-tools">
+            <h2>
+              <span>Equipment</span>
+            </h2>
+            <span flex></span>
+            <!-- <md-button class="md-icon-button" aria-label="More" ng-click="close()">
+              <md-icon> clear </md-icon>
+            </md-button> -->
+          </div>
+        </md-toolbar>
+          <md-radio-group ng-model="levelId">
+            <md-radio-button value="{{levelId}}" ng-repeat="(levelId,level) in equipment.level" ng-click="close()">{{equipment.level[levelId]}}</md-radio-button>
+          </md-radio-group>
+        <md-dialog-content >
+      </md-dialog>
+    </div>
   </div>
+
+
 </md-content>
 <div class="demo-md-panel md-padding">
   <p>
-    Skiscanner checks popular ski hire websites for the best prices so you dont have to.
+    Snowmodo checks popular ski hire websites for the best prices so you dont have to.
   </p>
   <p>
-    We show the prices for you to compare, but you make the booking with them.
+    We show the prices for you to compare, but you still make the booking with them (having found the best deal with Snowmodo!).
   </p>
   <p ng-show="lastCheckDate">Prices were last checked at {{ lastCheckDate | date : 'medium'}}</p>
 </div>

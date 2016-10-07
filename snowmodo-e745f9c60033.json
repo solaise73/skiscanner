@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "snowmodo",
+  "private_key_id": "e745f9c600334a5689cbcc468f19ebbfb63c63d9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDLXIvUiiNm9JnP\n/trfGK9Y0Iqnq9voYMcFiSD+qDZ9KkcpCBBgtHuxi7Iv3+wFH36tEZEdIo7S0MPT\nzbwV0v215B3as+c9hlp16vCxQVfkiNx2QxKm/OA3sYDmZ+nrmEsX63ebhooRxAoG\n2Tr6bqSdp8mvgcONGx+Wd5+aHqv2994Vpq0dlvgKy8nGiS/9KSB0OddbJKKSt8Cv\noF3R6oaLowRFJq2YAkNES4IsO0egW1LxEhOf82ZgWuNP0pxrkykZ5MX9tjDniDsG\n+c1pFQqpR04R4tboKiiTJNjEOV20jBaKsFcfm2nb2jx+AYwQQhgBkwydLxNNR65B\npqhaFJaRAgMBAAECggEAP67UjxNPMM+KV0s86T5Gsu5jbUxxShz8VixyK60rmxih\nPiUrU81RKvFPNJTPyW7qcXId2lzXEweTO4Gi08bF8q7j9nf+AxNOwrx28VtAFe4R\n8+rfLXHlGSu57O0/oKqJYY04YHjKRfP5G9ntET2SyVgg3ZgqT8bdpnYBgfb27Rh0\n+F3UfxC4FPRHUUqraAgDuYVvQsHkGy3HcYG+XYtyS9wxXXlm73D1o7YYjHuvizmF\nPK7Rw7YnbG6TMhFWSbnBwbGtjF/OWdknDZCVUpO5czx04LD6IvuhE+nYeN7eqfBZ\nGwt/2JNSo2xSskNkKv/D1aECEM8W/q8yajwn0lx8vQKBgQDrLVAXfBBO0XktzV8E\nDFRfFOBqyRJwT+ujGYaEAmra0vwm9M01luJdoq5wYSqv3u6vqrtdldYrQDx7UQTo\ndWNy12h+6I0Vd0i7JZXWPU54ovKTuQ/YHcFLUNTmN4mjPYlaKu0hMeKEP1XfABJG\ncKO1XmnWtUKwEYFVpX9XvRMSKwKBgQDdXhS8qa5jZkx7Mo6Qi7aPLwLlYIXxSLLp\nJJMSqZ47zW1VHdIsNymWkF2WSGYTUn51BPNG2pPXvUOLn/71JiXKDM4j5+azNi0a\nFc9anDbI0ppuHh/PpxMBnQkHbytMvDPoM79VKX6hC8iuyfYgjxd7rgpEUMOJ0Vu7\nMpSiePPoMwKBgQC7psNiic7lZUWg418udrwXxiuvaVN6JHssACESUm96vaEPYIQh\nf4yOFFHGP/H0tRiVONEaQoXKqw3Xg/U7mvdIWlL5+IsilrSFB9+APBjSL4sJjj/z\nPQLQGuZV7/i2NVLUjK37r7dDuNnG/2KVrCkkffpLpQRaQw2FDnIGy0pdUwKBgQCY\nMPNu1fW4Dv/r/1E2nWdwv3BtRNQxk7q1QVkADq9kDBLr3um9TluAUVaWWMYc6K1a\nRIIBJ4tXWp7SorhF0OlQJUegNfJNKaUOdwotEJM1tF1J8doLCKGvjUhE3TBWvFmv\nfcxAf5u4mwJo8R8POXF6ragPWbtlyBMZ+2dm4GNIMwKBgAuJoZ9+Dr88NrgdhRg+\n/wtf/fP76qwUUUqesdFSklZYFDSrl/ZlqWaqytkQL/MCFQNimXi3yP7AlnGLgVjv\nsuh9ej4E8KVvga7d3lkqOturF3u+O7tqoAOmMlMHSgSpZnEVr4EiIneghZr7667u\nLjy2M3kPy7IYAiKGaE9evtQQ\n-----END PRIVATE KEY-----\n",
+  "client_email": "server@snowmodo.iam.gserviceaccount.com",
+  "client_id": "108243693987950746753",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/server%40snowmodo.iam.gserviceaccount.com"
+}

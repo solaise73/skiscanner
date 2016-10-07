@@ -6,6 +6,15 @@
        "start": "start",
        "duration": "days"
    },
+   "countries": {
+      "AUTRICHE": "austria",
+      "ANDORRE": "andorra",
+      "FRANCE": "france",
+      "ALLEMAGNE": "germany",
+      "ITALIE": "italy",
+      "REPUBLIQUE TCHEQUE": "cezch-republic",
+      "SUISSE": "switzerland"
+   },
    "categories":{
       "1":{
          "id":1,

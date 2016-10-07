@@ -1,21 +1,17 @@
 <div>
-  <md-toolbar class="md-warn md-hue-2">
-    <div class="md-toolbar-tools">
-      <span flex></span>
-      <span>Skiscanner</span>
-    </div>
-  </md-toolbar>
-
 
   <md-content layout-padding >
     <div>
-      <h1>Ski hire price comparison</h1>
+      <h3>Ski hire price comparison</h3>
+      <div>Snowmodo checks popular ski hire websites for the best prices so you dont have to.</div>
+      <hr/>
 			<form name="contactForm" data-ng-submit="searchResort()">
 				<div layout-gt-sm="row">
           <md-input-container >
             <label>Country:</label>
             <md-select ng-model="countrySelected">
 				      <md-option value="andorra" selected>Andorra</md-option>
+              <md-option value="france" >France</md-option>
 				    </md-select>
           </md-input-container>
         </div>
@@ -23,7 +19,7 @@
           <md-input-container >
             <label>Resort:</label>
             <md-select ng-model="resortSelected">
-				      <md-option ng-repeat="(key, resort) in resorts" value="{{key}}" >{{resort.name}}</md-option>
+				      <md-option ng-repeat="(key, resort) in resorts | orderBy:'_name'" value="{{resort.place_id}}" ng-show="resort._country_id==countrySelected">{{resort._name}}</md-option>
 				    </md-select>
           </md-input-container>
         </div>
@@ -36,13 +32,28 @@
 
         <div layout-gt-sm="row">
         	<md-input-container >
-        		<md-button type="submit" class="md-primary md-raised" aria-label="Search prices">Go</md-button>
+        		<md-button type="submit" class="md-primary md-raised" aria-label="Search prices">Go compare</md-button>
         	</md-input-container>
         </div>
 
-        <div layout-gt-sm="row">
-          <p>Skiscanner checks popular ski hire websites for the best prices so you dont have to.</p>
-          <p>For now, you can only check resorts in Andorra</p>
+        <div layout-gt-sm="row" class="resorts">
+          For now, there are a few limitations that we are working on while we test this out. The more support and feedback we get the more effort we will put into adding new features.
+        </div>
+        <div layout-gt-sm="row" class="resorts">
+          <ul>
+            <li>Limited to Andorra and France.
+              <ul><li>Austria, Switzerland and Italy are coming soon</li></ul>
+            </li>
+            <li>Prices are checked for a 6 day ski rental
+              <ul><li>Most often the prices and discounts of skis are the same for other products.</li></ul>
+            </li>
+            <li>We check popular ski hire sites.
+              <ul><li>But perhaps not all - Let us know if your favourite ski hire website is missing.</li></ul>
+            </li>
+          </ul>
+          Please subscribe to our updates - we will use this to judge interest in developing this further. (We promise not to do anything spammy with your email :)
+
+
         </div>
 
       </form>

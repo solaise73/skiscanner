@@ -1,4 +1,5 @@
 var firebase      = require("firebase");
+var places        = require("./places");
 
 module.exports = {
 	getLastSaturday: getLastSaturday,
@@ -6,7 +7,10 @@ module.exports = {
 	getLastSaturdaysTimestamp: getLastSaturdaysTimestamp,
 	getTodaysTimestamp: getTodaysTimestamp,
   getTodayString: getTodayString,
-  getEndDate: getEndDate
+  getEndDate: getEndDate,
+  toTitleCase: toTitleCase,
+  findShop: places.findShop,
+  geoCodeResort: places.geoCodeResort
 }
 
 function getEndDate(startString, duration){
@@ -55,5 +59,9 @@ function getResortSuppliers(params){
   .then(function(snap){
     return snap.val()
   })
+}
+
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 

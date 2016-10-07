@@ -208,11 +208,11 @@
         "snowboard": "S"
     },
     "level": {
-        "blue": 1,
-        "red": 2,
-        "black": 3,
-        "or": 4,
-        "diamond": 5
+        "blue": "L1",
+        "red": "L2",
+        "black": "L3",
+        "or": "L4",
+        "diamond": "L5"
     }
   }
 }

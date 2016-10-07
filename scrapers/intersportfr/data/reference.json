@@ -1,0 +1,10 @@
+{
+    "levels":{
+        "pack-bleu": "L1",
+        "pack-rouge": "L2",
+        "pack-noir": "L3",
+        "pack-gold-freeride": "L4",
+        "pack-gold-carve": "L4",
+        "pack-gold-all-mountain": "L4"
+    }
+}

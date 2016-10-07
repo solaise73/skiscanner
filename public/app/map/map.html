@@ -1,0 +1,19 @@
+
+<section>
+  <h1>My Map</h1>
+  <section>
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-markers
+      options="'getOptions'"
+      models="mapMarkers"
+      idKey="'id'">
+    </ui-gmap-marker>
+  </ui-gmap-google-map>
+</section>
+<section layout="row" layout-align="center center">
+  <div ng-show="loading">
+    Loading
+    <md-progress-circular md-mode="indeterminate" md-diameter="100%"></md-progress-circular>
+  </div>
+</section>
+</section>

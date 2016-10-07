@@ -1,11 +1,5 @@
 {
-  "paramNames": {
-    "country_id": "country_id",
-    "resort_id": "resort_id",
-    "shop_id": "shop_id",
-    "start": "first_day",
-    "duration": "duration"
-  },
+  
   "packLookups": {
     "SC": "B",
     "MC": "B"
@@ -208,11 +202,11 @@
         "snowboard": "S"
     },
     "level": {
-        "blue": 1,
-        "red": 2,
-        "black": 3,
-        "or": 4,
-        "diamond": 5
+        "blue": "L1",
+        "red": "L2",
+        "black": "L3",
+        "or": "L4",
+        "diamond": "L5"
     }
   }
 }

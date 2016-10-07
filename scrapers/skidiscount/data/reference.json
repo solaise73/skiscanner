@@ -32,11 +32,11 @@
         "snowboard": "S"
     },
     "level": {
-        "blue skis": 1,
-        "red skis": 2,
-        "black skis": 3,
-        "diamond skis": 4,
-        "pink skis": 5
+        "blue skis": "L1",
+        "red skis": "L2",
+        "black skis": "L3",
+        "diamond skis": "L4",
+        "pink skis": "L5"
     }
   }
 }
