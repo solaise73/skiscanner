@@ -22,7 +22,7 @@ var params = {
 // scrapers.skidiscount.fetchResort(params).then(function(data){
 // 	console.log('DONE', data)
 // })
-scrapers.setUp(params)
+scrapers.twinner.fetchResort(params)
 // scrapers.intersportfr.fetchResort(params)
 // scrapers.fetchResort(params)
 // .then(function(result){

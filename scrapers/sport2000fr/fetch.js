@@ -112,7 +112,6 @@ function processShop(params){
   Object.keys(products).forEach(function(key){
     var product = products[key];
     var details = getProductDetails(product, params.them.discounts[product.id].discounts['value'+params.us.duration], params.us.duration);
-    console.log('[sport2000fr] Got id =', product.id);
     if (details){
       details.forEach(function(p){
         var catId = p.category;

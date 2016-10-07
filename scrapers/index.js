@@ -10,9 +10,10 @@ var skidiscount   = require('./skidiscount');
 var skirepublic   = require('./skirepublic');
 var intersportfr  = require('./intersportfr');
 var skimium       = require('./skimium');
+var twinner       = require('./twinner');
 
 
-var websites = ['skiset', 'sport2000fr', 'alpinresorts', 'snowrental', 'skidiscount', 'skirepublic', 'intersportfr', 'skimium' ];
+var websites = ['skiset', 'sport2000fr', 'alpinresorts', 'snowrental', 'skidiscount', 'skirepublic', 'intersportfr', 'skimium', 'twinner' ];
 websites.forEach(function(website){
   var dir = './tmp/websites/'+ website;
   if (!fs.existsSync(dir)){ fs.mkdirSync(dir); }
@@ -28,6 +29,7 @@ module.exports = {
   skirepublic: skirepublic,
   intersportfr: intersportfr,
   skimium: skimium,
+  twinner: twinner,
   fetchResort: fetchResort,
   setUp: setUp
 }
@@ -81,7 +83,7 @@ function setUp(params){
     skiset.setUp(params),
     alpinresorts.setUp(params),
     skidiscount.setUp(params),
-    intersportfr.setUp(params)
+    intersportfr.setUp(params),
   ]).then(function(data){
     console.log('Then! Setup', data)
   }).catch(function(err){

@@ -9,7 +9,7 @@ var googleMapsClient  = require('@google/maps').createClient({
 });
 
 // Place API textsearch
-//https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyDPa5o14HjfownTIREGy_KZYq6Ns7y-qxA&query=Tignes%20Val%20Claret
+// https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyDPa5o14HjfownTIREGy_KZYq6Ns7y-qxA&query=Tignes%20Val%20Claret
 
 // Place API place details
 // https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDPa5o14HjfownTIREGy_KZYq6Ns7y-qxA&&placeid=ChIJSTxBjrF0iUcRPgmyj8Z0quA
@@ -31,9 +31,17 @@ function findShop(paramsIn){
   var resortId = params.us.resort_id;
   var countryId = params.us.country_id;
   var supplierResortName = params.them.resort_name;
-  var query = [shopName, supplierResortName, countryId].join(', ');
+  var supplierShopAddress = params.them.shop_address;
   var firebaseRef   = firebase.database().ref();
   var geofire       = new geoFire(firebaseRef.child('geo/shops'));
+
+  var queryElements = [shopName]
+  if (supplierShopAddress) queryElements.push(supplierShopAddress)
+  if (supplierResortName) queryElements.push(supplierResortName)
+  if (countryId) queryElements.push(countryId)
+
+  var query = queryElements.join(', ');
+
   console.log('[findShop] ', supplier, query);
 
   cache.get(query, function(callback) {
